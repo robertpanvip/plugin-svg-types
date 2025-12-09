@@ -48,6 +48,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@plugin-cra-proxy/core": "latest"
+    "@plugin-svg-types/core": "latest"
   }
 }

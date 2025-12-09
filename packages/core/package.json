@@ -44,7 +44,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "address": "^2.0.3",
-    "http-proxy-middleware": "^3.0.5"
   }
 }

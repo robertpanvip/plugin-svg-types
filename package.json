@@ -16,6 +16,5 @@
   "author": "pan",
   "license": "ISC",
   "dependencies": {
-    "supports-color": "^10.2.2"
   }
 }
