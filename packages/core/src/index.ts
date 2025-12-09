@@ -1,14 +1,16 @@
 import type { WatchListener } from "node:fs";
 import fs from "node:fs";
 import path from "node:path";
-import type { RsbuildPlugin } from "@rsbuild/core";
 
-type Options = {
+export type PluginSvgTypesOptions = {
   dir?: string;
   out?: string;
 };
-
-export default function pluginSvgTypes(options: Options = {}): RsbuildPlugin {
+type Plugin={
+   name?:string;
+   setup(api:{onExit:(call:()=>void)=>void}):void
+}
+export default function pluginSvgTypes(options: PluginSvgTypesOptions = {}): Plugin {
   const { dir = "src/assets/svg", out = "src/assets/svg/types.d.ts" } = options;
 
   function generate() {

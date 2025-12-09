@@ -1,0 +1,21 @@
+{
+  "name": "plugin-svg-types",
+  "version": "1.0.0",
+  "description": "plugin-svg",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "homepage": "https://github.com/robertpanvip/plugin-svg-types.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertpanvip/plugin-svg-types.git"
+  },
+  "bugs": {
+    "url": "https://github.com/robertpanvip/plugin-svg-types/issues"
+  },
+  "author": "pan",
+  "license": "ISC",
+  "dependencies": {
+    "supports-color": "^10.2.2"
+  }
+}
