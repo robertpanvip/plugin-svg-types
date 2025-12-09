@@ -1,11 +1,11 @@
 import {
-	pluginSvgTypes as pluginSvgTypesCore,
-	type SvgTypesOptions,
+	default as pluginSvgTypesCore,
+	type PluginSvgTypesOptions,
 } from "@plugin-svg-types/core";
 import type { RsbuildPlugin } from "@rsbuild/core";
 
 export const pluginSvgTypes = (
-	options?: SvgTypesOptions,
+	options?: PluginSvgTypesOptions,
 ): RsbuildPlugin => ({
 	name: "plugin-svg-types",
 	setup(api) {

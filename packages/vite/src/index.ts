@@ -1,5 +1,5 @@
 import {
-	pluginSvgTypes as pluginSvgTypesCore,
+	default as pluginSvgTypesCore,
 	type PluginSvgTypesOptions,
 } from "@plugin-svg-types/core";
 import type { Plugin } from "vite";

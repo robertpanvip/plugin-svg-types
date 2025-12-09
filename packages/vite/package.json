@@ -42,6 +42,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@plugin-svg-types/core": "latest"
+    "@plugin-svg-types/core":"latest"
   }
 }

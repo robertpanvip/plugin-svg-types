@@ -3,18 +3,42 @@ import fs from "node:fs";
 import path from "node:path";
 
 export type PluginSvgTypesOptions = {
-  dir?: string;
-  out?: string;
+  /**
+   * 扫描 SVG 文件的输入目录路径。
+   * The input directory path to scan for SVG files.
+   * @default "src/assets/svg"
+   */
+  inputDir?: string;
+
+  /**
+   * 自动生成的类型声明文件的输出路径 (包含文件名)。
+   * The output path for the auto-generated type declaration file (including filename).
+   * @default "src/assets/svg/types.d.ts"
+   */
+  outputFile?: string;
+
+  /**
+   * 生成的 TypeScript 联合类型的名称。
+   * The name of the generated TypeScript union type (e.g., 'IconName').
+   * @default 'SvgIconName'
+   */
+  typeName?: string
 };
-type Plugin={
-   name?:string;
-   setup(api:{onExit:(call:()=>void)=>void}):void
+
+type PluginApi = {
+  onExit: (callback: () => void) => void
 }
+
+type Plugin = {
+  name?: string;
+  setup(api: PluginApi): void
+}
+
 export default function pluginSvgTypes(options: PluginSvgTypesOptions = {}): Plugin {
-  const { dir = "src/assets/svg", out = "src/assets/svg/types.d.ts" } = options;
+  const { inputDir = "src/assets/svg", outputFile = "src/assets/svg/types.d.ts", typeName = 'SvgIconName' } = options;
 
   function generate() {
-    const absDir = path.resolve(dir);
+    const absDir = path.resolve(inputDir);
     if (!fs.existsSync(absDir)) return;
 
     const files = fs
@@ -29,10 +53,11 @@ export default function pluginSvgTypes(options: PluginSvgTypesOptions = {}): Plu
  * Do not modify this file directly.
  * Generated at: ${new Date().toISOString()}
  */
-export type SvgIconName = ${union};
+export type ${typeName} = ${union};
+export default ${typeName};
 `;
 
-    fs.writeFileSync(path.resolve(out), content);
+    fs.writeFileSync(path.resolve(outputFile), content);
     console.log(`[pluginSvgTypes] 生成 icon types: ${files.length} 个`);
   }
 
@@ -48,8 +73,8 @@ export type SvgIconName = ${union};
           timer = setTimeout(generate, 100);
         }
       };
-      const watcher = fs.watch(dir, listener);
-      api.onExit(()=>{
+      const watcher = fs.watch(inputDir, listener);
+      api.onExit(() => {
         watcher.close();
         timer && clearTimeout(timer);
       });
