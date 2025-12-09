@@ -49,7 +49,10 @@ export type SvgIconName = ${union};
         }
       };
       const watcher = fs.watch(dir, listener);
-      api.onExit(watcher.close);
+      api.onExit(()=>{
+        watcher.close();
+        timer && clearTimeout(timer);
+      });
     },
   };
 }
